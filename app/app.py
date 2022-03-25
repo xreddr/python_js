@@ -1,11 +1,16 @@
 from flask import Flask
 from flask import jsonify
+from flask_cors import CORS
+import json
+
 app = Flask(__name__)
+cors = CORS(app)
 
-
-@app.route('/')
+@app.route('/', methods=["GET"])
 def hello_world():
-    return jsonify('Hello World')
+    response = jsonify("Hello World")
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    return response
 
 
 @app.route('/<int:id>/<string>')
